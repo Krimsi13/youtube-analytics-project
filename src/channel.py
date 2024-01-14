@@ -33,11 +33,7 @@ class Channel:
         return self.__channel_id
 
     def to_json(self, js):
-        with open(js, "w", encoding="utf-8") as f:
-            f.write(f"id канала: {self.channel_id}\n")
-            f.write(f"Название канала: {self.title}\n")
-            f.write(f"Описание канала: {self.description}\n")
-            f.write(f"Cсылка на канал: {self.url}\n")
-            f.write(f"Количество подписчиков: {self.subscriber_count}\n")
-            f.write(f"Количество видео: {self.video_count}\n")
-            f.write(f"Общее количество просмотров: {self.view_count}\n\n")
+        json_data = json.dumps(self.channel)
+
+        with open(f"../homework-2/{js}", "w") as f:
+            f.write(json_data)
