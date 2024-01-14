@@ -19,6 +19,15 @@ class Channel:
         self.subscriber_count = self.channel['items'][0]['statistics']['subscriberCount']
         self.video_count = self.channel['items'][0]['statistics']['videoCount']
         self.view_count = self.channel['items'][0]['statistics']['viewCount']
+        self.data = {
+            'id': self.__channel_id,
+            'title': self.title,
+            'description': self.description,
+            'url': self.url,
+            'subscriber_count': self.subscriber_count,
+            'video_count': self.video_count,
+            'view_count': self.view_count
+        }
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
@@ -33,7 +42,7 @@ class Channel:
         return self.__channel_id
 
     def to_json(self, js):
-        json_data = json.dumps(self.channel)
+        json_data = json.dumps(self.data, ensure_ascii=False)
 
-        with open(f"../homework-2/{js}", "w") as f:
+        with open(f"../homework-2/{js}", "w", encoding='utf-8') as f:
             f.write(json_data)
