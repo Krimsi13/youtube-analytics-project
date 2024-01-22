@@ -19,15 +19,6 @@ class Channel:
         self.subscriber_count = self.channel['items'][0]['statistics']['subscriberCount']
         self.video_count = self.channel['items'][0]['statistics']['videoCount']
         self.view_count = self.channel['items'][0]['statistics']['viewCount']
-        self.data = {
-            'id': self.__channel_id,
-            'title': self.title,
-            'description': self.description,
-            'url': self.url,
-            'subscriber_count': self.subscriber_count,
-            'video_count': self.video_count,
-            'view_count': self.view_count
-        }
 
     def __str__(self):
         return f"{self.title} ({self.url})"
@@ -50,7 +41,7 @@ class Channel:
     def __le__(self, other):
         return int(self.subscriber_count) <= int(other.subscriber_count)
 
-    def __qe__(self, other):
+    def __eq__(self, other):
         return int(self.subscriber_count) == int(other.subscriber_count)
 
     def print_info(self) -> None:
@@ -66,7 +57,16 @@ class Channel:
         return self.__channel_id
 
     def to_json(self, js):
-        json_data = json.dumps(self.data, ensure_ascii=False)
+        data = {
+                'id': self.__channel_id,
+                'title': self.title,
+                'description': self.description,
+                'url': self.url,
+                'subscriber_count': self.subscriber_count,
+                'video_count': self.video_count,
+                'view_count': self.view_count
+            }
+        json_data = json.dumps(data, ensure_ascii=False)
 
         with open(f"../homework-2/{js}", "w", encoding='utf-8') as f:
             f.write(json_data)
