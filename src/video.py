@@ -1,10 +1,7 @@
-import os
-from googleapiclient.discovery import build
+from src.API import API
 
 
-class Video:
-    API_KEY: str = os.getenv('YT_API_KEY')
-    youtube = build('youtube', 'v3', developerKey=API_KEY)
+class Video(API):
 
     def __init__(self, id_vid):
         self.id_vid = id_vid
